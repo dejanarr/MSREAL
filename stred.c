@@ -76,7 +76,7 @@ ssize_t stred_read(struct file *pfile, char __user *buffer, size_t length, loff_
 ssize_t stred_write(struct file *pfile, const char __user *buffer, size_t length, loff_t *offset) 
 {
 	char buff[120];
-	int funkcija[8];
+	int funkcija[9];
 	int str1[BUFF_SIZE];
 	int ret;
 	int len;
@@ -151,6 +151,32 @@ ssize_t stred_write(struct file *pfile, const char __user *buffer, size_t length
 		printk(KERN_INFO "Funkcija append je odradjena!\n");
 
 	}
+	
+//funkcija truncate
+	if (!strcmp(funkcija, "truncate")) {
+		int i;
+		char *tmp;
+		i = simple_strtol(str1, &tmp, 10);
+		
+		if((pos - i) < 0)
+		{
+			pos = 0;
+			stred[0] = '\0';
+			printk(KERN_WARNING "Nema toliko karaktera u baferu\n");
+		}
+		else
+		{
+			pos -= i;
+			stred[pos] = '\0';
+			printf(KERN_INFO "Uspresno odradjena funkcija truncate\n");
+		}
+		
+		printk(KERN_INFO "Funkcija truncate je zavrsena\n");
+		
+	}
+	
+
+		
 			
 
 /*static int __init stred_init(void)
