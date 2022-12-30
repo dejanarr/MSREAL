@@ -76,7 +76,7 @@ ssize_t stred_read(struct file *pfile, char __user *buffer, size_t length, loff_
 ssize_t stred_write(struct file *pfile, const char __user *buffer, size_t length, loff_t *offset) 
 {
 	char buff[120];
-	int zadato[8];
+	int funkcija[8];
 	int str1[BUFF_SIZE];
 	int ret;
 	int len;
@@ -94,7 +94,7 @@ ssize_t stred_write(struct file *pfile, const char __user *buffer, size_t length
 }
 
 //funkcija string
-	if (!strcmp(zadato, "string= ")) {
+	if (!strcmp(funkcija, "string")) {
 		pos = 0;
 		len = strlen(str1);
 		
@@ -107,8 +107,13 @@ ssize_t stred_write(struct file *pfile, const char __user *buffer, size_t length
 	}
 	
 //funkcija clear
-	
-			
+	if (!strcmp(funkcija, "clear")) {
+		stred[0] = '\0';
+		printk(KERN_INFO "Zavrsena funkcija clear\n");
+		
+	}	
+		
+//funkcija shrink
 
 /*static int __init stred_init(void)
 {
