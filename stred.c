@@ -84,7 +84,7 @@ ssize_t stred_write(struct file *pfile, const char __user *buffer, size_t length
 	ret = copy_from_user(buff, buffer, length);
 	if(ret)
 		return -EFAULT;
-	buff[length-1] = '\0';
+	buff[len-1] = '\0';
 
 	ret = sscanf(buff,"%d,%d",&value,&position);
 
@@ -114,6 +114,25 @@ ssize_t stred_write(struct file *pfile, const char __user *buffer, size_t length
 	}	
 		
 //funkcija shrink
+	if (!strcmp(funkcija, "shrink")) {
+		int i;
+		
+		if (stred[len-1] == ' ')
+		{
+			stred[len-1] = '\0';
+		}
+		
+		if(stred[0] == ' ')
+		{
+			for(i = 1; i < len; i++) {
+				stred[i-1] = stred[i];
+			}
+		}
+		
+		print(KERN_INFO "Funkcija shrink je odradjena!\n");
+	}
+	
+	
 
 /*static int __init stred_init(void)
 {
