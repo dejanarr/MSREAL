@@ -176,17 +176,17 @@ ssize_t stred_write(struct file *pfile, const char __user *buffer, size_t length
 	}
 	
 
+/*funkcija remove
+	if (!strcmp(funkcija, "remove")) {
 		
-			
+		int tmp;
+		
+		tmp = strcmp(str1
+*/
 
-/*static int __init stred_init(void)
+static int __init stred_init(void)
 {
    int ret = 0;
-	int i=0;
-
-	//Initialize array
-	for (i=0; i<10; i++)
-		storage[i] = 0;
 
    ret = alloc_chrdev_region(&my_dev_id, 0, 1, "stred");
    if (ret){
@@ -244,4 +244,3 @@ static void __exit stred_exit(void)
 
 module_init(stred_init);
 module_exit(stred_exit);
-*/
