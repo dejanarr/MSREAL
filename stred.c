@@ -86,7 +86,7 @@ ssize_t stred_write(struct file *pfile, const char __user *buffer, size_t length
 		return -EFAULT;
 	buff[len-1] = '\0';
 
-	ret = sscanf(buff,"%d,%d",&value,&position);
+	ret = sscanf(buff,"%10[^= ]=%99[^\t\n=]",funkcija,str1);
 
 	
 
