@@ -73,11 +73,13 @@ ssize_t stred_read(struct file *pfile, char __user *buffer, size_t length, loff_
 }
 
 
-/*ssize_t storage_write(struct file *pfile, const char __user *buffer, size_t length, loff_t *offset) 
+ssize_t stred_write(struct file *pfile, const char __user *buffer, size_t length, loff_t *offset) 
 {
-	char buff[BUFF_SIZE];
-	int position, value;
+	char buff[120];
+	int zadato[8];
+	int str1[BUFF_SIZE];
 	int ret;
+	int len;
 
 	ret = copy_from_user(buff, buffer, length);
 	if(ret)
@@ -86,27 +88,29 @@ ssize_t stred_read(struct file *pfile, char __user *buffer, size_t length, loff_
 
 	ret = sscanf(buff,"%d,%d",&value,&position);
 
-	if(ret==2)//two parameters parsed in sscanf
-	{
-		if(position >=0 && position <=9)
-		{
-			storage[position] = value; 
-			printk(KERN_INFO "Succesfully wrote value %d in position %d\n", value, position); 
-		}
-		else
-		{
-			printk(KERN_WARNING "Position should be between 0 and 9\n"); 
-		}
-	}
-	else
-	{
-		printk(KERN_WARNING "Wrong command format\nexpected: n,m\n\tn-position\n\tm-value\n");
-	}
+	
 
 	return length;
 }
 
-static int __init stred_init(void)
+//funkcija string
+	if (!strcmp(zadato, "string= ")) {
+		pos = 0;
+		len = strlen(str1);
+		
+		if (len < 100)
+			strncpy(stred, str1, len);
+			printk(KERN_INFO "Uneti string je okej!\n");
+		else
+			printk(KERN_WARNING "Uneti string je predugacak!\n");
+		stred[len] = '\0';
+	}
+	
+//funkcija clear
+	
+			
+
+/*static int __init stred_init(void)
 {
    int ret = 0;
 	int i=0;
