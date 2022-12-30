@@ -129,10 +129,29 @@ ssize_t stred_write(struct file *pfile, const char __user *buffer, size_t length
 			}
 		}
 		
-		print(KERN_INFO "Funkcija shrink je odradjena!\n");
+		printk(KERN_INFO "Funkcija shrink je odradjena!\n");
 	}
 	
-	
+//funkcija append
+	if (!strcmp(funckija, "append")) {
+		len = strlen(str1);
+		if(pos+len >=100) {
+			printk(KERN_WARNING "Vec postojeci string sa unetim prevazilazi broj mesta\n");
+		}
+		else {
+			int i;
+			for (i=0; i < len; i++)
+			{
+				stred[pos+i] = str1[i];
+			}
+			pos+=len;
+			stred[pos] = '\0';
+		}
+
+		printk(KERN_INFO "Funkcija append je odradjena!\n");
+
+	}
+			
 
 /*static int __init stred_init(void)
 {
